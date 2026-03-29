@@ -1,0 +1,198 @@
+export interface Ingredient {
+  name: string;
+  quantity: number;
+  unit: string;
+}
+
+export interface Recipe {
+  id: string;
+  name: string;
+  emoji: string;
+  category: "almuerzo" | "cena" | "ambos";
+  baseServings: number;
+  prepTime: string;
+  ingredients: Ingredient[];
+}
+
+export const recipes: Recipe[] = [
+  {
+    id: "arroz-con-pollo",
+    name: "Arroz con Pollo",
+    emoji: "🍗",
+    category: "almuerzo",
+    baseServings: 4,
+    prepTime: "45 min",
+    ingredients: [
+      { name: "Arroz", quantity: 2, unit: "tazas" },
+      { name: "Pollo (piezas)", quantity: 8, unit: "piezas" },
+      { name: "Cebolla", quantity: 1, unit: "unidad" },
+      { name: "Pimentón", quantity: 1, unit: "unidad" },
+      { name: "Zanahoria", quantity: 2, unit: "unidades" },
+      { name: "Ajo", quantity: 3, unit: "dientes" },
+      { name: "Aceite", quantity: 3, unit: "cucharadas" },
+      { name: "Sal", quantity: 1, unit: "cucharadita" },
+      { name: "Comino", quantity: 0.5, unit: "cucharadita" },
+    ],
+  },
+  {
+    id: "pasta-bolognesa",
+    name: "Pasta Boloñesa",
+    emoji: "🍝",
+    category: "ambos",
+    baseServings: 4,
+    prepTime: "35 min",
+    ingredients: [
+      { name: "Pasta", quantity: 400, unit: "g" },
+      { name: "Carne molida", quantity: 500, unit: "g" },
+      { name: "Tomate triturado", quantity: 400, unit: "g" },
+      { name: "Cebolla", quantity: 1, unit: "unidad" },
+      { name: "Ajo", quantity: 2, unit: "dientes" },
+      { name: "Zanahoria", quantity: 1, unit: "unidad" },
+      { name: "Aceite de oliva", quantity: 2, unit: "cucharadas" },
+      { name: "Sal", quantity: 1, unit: "cucharadita" },
+      { name: "Orégano", quantity: 1, unit: "cucharadita" },
+    ],
+  },
+  {
+    id: "tacos",
+    name: "Tacos de Carne",
+    emoji: "🌮",
+    category: "cena",
+    baseServings: 4,
+    prepTime: "30 min",
+    ingredients: [
+      { name: "Tortillas de maíz", quantity: 12, unit: "unidades" },
+      { name: "Carne de res", quantity: 500, unit: "g" },
+      { name: "Cebolla", quantity: 1, unit: "unidad" },
+      { name: "Cilantro", quantity: 1, unit: "manojo" },
+      { name: "Limón", quantity: 3, unit: "unidades" },
+      { name: "Aguacate", quantity: 2, unit: "unidades" },
+      { name: "Sal", quantity: 1, unit: "cucharadita" },
+      { name: "Chile", quantity: 2, unit: "unidades" },
+    ],
+  },
+  {
+    id: "ensalada-cesar",
+    name: "Ensalada César",
+    emoji: "🥗",
+    category: "ambos",
+    baseServings: 4,
+    prepTime: "15 min",
+    ingredients: [
+      { name: "Lechuga romana", quantity: 2, unit: "unidades" },
+      { name: "Pechuga de pollo", quantity: 2, unit: "unidades" },
+      { name: "Pan para crutones", quantity: 4, unit: "rebanadas" },
+      { name: "Queso parmesano", quantity: 80, unit: "g" },
+      { name: "Aderezo César", quantity: 120, unit: "ml" },
+      { name: "Aceite de oliva", quantity: 2, unit: "cucharadas" },
+      { name: "Ajo", quantity: 1, unit: "diente" },
+    ],
+  },
+  {
+    id: "sopa-de-lentejas",
+    name: "Sopa de Lentejas",
+    emoji: "🥣",
+    category: "almuerzo",
+    baseServings: 6,
+    prepTime: "50 min",
+    ingredients: [
+      { name: "Lentejas", quantity: 500, unit: "g" },
+      { name: "Papa", quantity: 2, unit: "unidades" },
+      { name: "Zanahoria", quantity: 2, unit: "unidades" },
+      { name: "Cebolla", quantity: 1, unit: "unidad" },
+      { name: "Ajo", quantity: 3, unit: "dientes" },
+      { name: "Tomate", quantity: 2, unit: "unidades" },
+      { name: "Comino", quantity: 1, unit: "cucharadita" },
+      { name: "Sal", quantity: 1.5, unit: "cucharaditas" },
+      { name: "Aceite", quantity: 2, unit: "cucharadas" },
+    ],
+  },
+  {
+    id: "hamburguesas",
+    name: "Hamburguesas Caseras",
+    emoji: "🍔",
+    category: "cena",
+    baseServings: 4,
+    prepTime: "25 min",
+    ingredients: [
+      { name: "Carne molida", quantity: 600, unit: "g" },
+      { name: "Pan de hamburguesa", quantity: 4, unit: "unidades" },
+      { name: "Lechuga", quantity: 4, unit: "hojas" },
+      { name: "Tomate", quantity: 2, unit: "unidades" },
+      { name: "Cebolla", quantity: 1, unit: "unidad" },
+      { name: "Queso", quantity: 4, unit: "rebanadas" },
+      { name: "Sal", quantity: 1, unit: "cucharadita" },
+      { name: "Pimienta", quantity: 0.5, unit: "cucharadita" },
+    ],
+  },
+  {
+    id: "pollo-al-horno",
+    name: "Pollo al Horno",
+    emoji: "🍗",
+    category: "almuerzo",
+    baseServings: 6,
+    prepTime: "1h 30min",
+    ingredients: [
+      { name: "Pollo entero", quantity: 1, unit: "unidad" },
+      { name: "Papa", quantity: 6, unit: "unidades" },
+      { name: "Cebolla", quantity: 2, unit: "unidades" },
+      { name: "Ajo", quantity: 6, unit: "dientes" },
+      { name: "Limón", quantity: 2, unit: "unidades" },
+      { name: "Romero", quantity: 2, unit: "ramas" },
+      { name: "Aceite de oliva", quantity: 4, unit: "cucharadas" },
+      { name: "Sal", quantity: 2, unit: "cucharaditas" },
+      { name: "Pimienta", quantity: 1, unit: "cucharadita" },
+    ],
+  },
+  {
+    id: "quesadillas",
+    name: "Quesadillas",
+    emoji: "🧀",
+    category: "cena",
+    baseServings: 4,
+    prepTime: "20 min",
+    ingredients: [
+      { name: "Tortillas de harina", quantity: 8, unit: "unidades" },
+      { name: "Queso Oaxaca", quantity: 400, unit: "g" },
+      { name: "Champiñones", quantity: 200, unit: "g" },
+      { name: "Pimentón", quantity: 1, unit: "unidad" },
+      { name: "Cebolla", quantity: 1, unit: "unidad" },
+      { name: "Aceite", quantity: 2, unit: "cucharadas" },
+    ],
+  },
+  {
+    id: "pescado-a-la-plancha",
+    name: "Pescado a la Plancha",
+    emoji: "🐟",
+    category: "ambos",
+    baseServings: 4,
+    prepTime: "20 min",
+    ingredients: [
+      { name: "Filete de pescado", quantity: 4, unit: "unidades" },
+      { name: "Limón", quantity: 3, unit: "unidades" },
+      { name: "Ajo", quantity: 3, unit: "dientes" },
+      { name: "Aceite de oliva", quantity: 3, unit: "cucharadas" },
+      { name: "Sal", quantity: 1, unit: "cucharadita" },
+      { name: "Pimienta", quantity: 0.5, unit: "cucharadita" },
+      { name: "Perejil", quantity: 1, unit: "manojo" },
+    ],
+  },
+  {
+    id: "arroz-frito",
+    name: "Arroz Frito",
+    emoji: "🍚",
+    category: "ambos",
+    baseServings: 4,
+    prepTime: "25 min",
+    ingredients: [
+      { name: "Arroz cocido", quantity: 4, unit: "tazas" },
+      { name: "Huevos", quantity: 3, unit: "unidades" },
+      { name: "Zanahoria", quantity: 1, unit: "unidad" },
+      { name: "Arvejas", quantity: 100, unit: "g" },
+      { name: "Cebollín", quantity: 4, unit: "tallos" },
+      { name: "Salsa de soya", quantity: 3, unit: "cucharadas" },
+      { name: "Aceite de sésamo", quantity: 1, unit: "cucharada" },
+      { name: "Ajo", quantity: 2, unit: "dientes" },
+    ],
+  },
+];
