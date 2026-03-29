@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Recipe } from "@/data/recipes";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, ArrowLeft, Users, ShoppingCart } from "lucide-react";
+import { Minus, Plus, ArrowLeft, Users, ShoppingCart, Scale } from "lucide-react";
 
 interface RecipeDetailProps {
   recipe: Recipe;
@@ -12,13 +12,45 @@ const formatQuantity = (qty: number): string => {
   if (qty === 0) return "0";
   if (Number.isInteger(qty)) return qty.toString();
   if (Math.abs(qty - Math.round(qty)) < 0.01) return Math.round(qty).toString();
-  // Show fractions nicely
   const rounded = Math.round(qty * 100) / 100;
   return rounded.toString();
 };
 
+// Approximate conversions to grams
+const unitToGrams: Record<string, number> = {
+  cucharada: 15,
+  cucharadas: 15,
+  cucharadita: 5,
+  cucharaditas: 5,
+  taza: 150,
+  tazas: 150,
+  unidad: 150,
+  unidades: 150,
+  piezas: 200,
+  dientes: 5,
+  diente: 5,
+  hojas: 30,
+  manojo: 50,
+  ramas: 5,
+  rebanadas: 30,
+  tallos: 10,
+  ml: 1, // ml ≈ g for liquids
+};
+
+const canConvert = (unit: string): boolean => {
+  return unit !== "g" && unit in unitToGrams;
+};
+
+const toGrams = (qty: number, unit: string): { quantity: number; unit: string } => {
+  if (unit === "g") return { quantity: qty, unit: "g" };
+  const factor = unitToGrams[unit];
+  if (!factor) return { quantity: qty, unit };
+  return { quantity: Math.round(qty * factor), unit: "g" };
+};
+
 const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
   const [servings, setServings] = useState(recipe.baseServings);
+  const [showGrams, setShowGrams] = useState(false);
   const ratio = servings / recipe.baseServings;
 
   return (
@@ -72,13 +104,29 @@ const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
 
       {/* Ingredients List */}
       <div className="bg-card border border-border rounded-xl p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <ShoppingCart className="w-5 h-5 text-secondary" />
-          <h3 className="font-display text-lg text-foreground">Ingredientes</h3>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <ShoppingCart className="w-5 h-5 text-secondary" />
+            <h3 className="font-display text-lg text-foreground">Ingredientes</h3>
+          </div>
+          <button
+            onClick={() => setShowGrams(!showGrams)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-body transition-colors ${
+              showGrams
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Scale className="w-3.5 h-3.5" />
+            {showGrams ? "En gramos" : "Original"}
+          </button>
         </div>
         <ul className="space-y-3">
           {recipe.ingredients.map((ing, i) => {
             const scaledQty = ing.quantity * ratio;
+            const display = showGrams && canConvert(ing.unit)
+              ? toGrams(scaledQty, ing.unit)
+              : { quantity: scaledQty, unit: ing.unit };
             return (
               <li
                 key={i}
@@ -87,7 +135,7 @@ const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
               >
                 <span className="font-body text-foreground">{ing.name}</span>
                 <span className="font-body font-semibold text-primary tabular-nums">
-                  {formatQuantity(scaledQty)} {ing.unit}
+                  {formatQuantity(display.quantity)} {display.unit}
                 </span>
               </li>
             );
