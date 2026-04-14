@@ -2,11 +2,11 @@ import { useState, useMemo } from "react";
 import { recipes, Recipe } from "@/data/recipes";
 import RecipeCard from "@/components/RecipeCard";
 import RecipeDetail from "@/components/RecipeDetail";
-import { ChefHat, Filter, X } from "lucide-react";
+import { ChefHat, Filter as FilterIcon, X } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 
-type Filter = "todos" | "almuerzo" | "cena";
+type CategoryFilter = "todos" | "almuerzo" | "cena";
 
 const Index = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
