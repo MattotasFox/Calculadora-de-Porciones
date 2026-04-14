@@ -1,18 +1,50 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { recipes, Recipe } from "@/data/recipes";
 import RecipeCard from "@/components/RecipeCard";
 import RecipeDetail from "@/components/RecipeDetail";
-import { ChefHat } from "lucide-react";
+import { ChefHat, Filter, X } from "lucide-react";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
 
 type Filter = "todos" | "almuerzo" | "cena";
 
 const Index = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [filter, setFilter] = useState<Filter>("todos");
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [ingredientSearch, setIngredientSearch] = useState("");
 
-  const filtered = filter === "todos"
-    ? recipes
-    : recipes.filter(r => r.category === filter || r.category === "ambos");
+  // Extract all unique ingredient names
+  const allIngredients = useMemo(() => {
+    const set = new Set<string>();
+    recipes.forEach(r => r.ingredients.forEach(i => set.add(i.name)));
+    return Array.from(set).sort();
+  }, []);
+
+  const filteredIngredients = allIngredients.filter(name =>
+    name.toLowerCase().includes(ingredientSearch.toLowerCase())
+  );
+
+  const toggleIngredient = (name: string) => {
+    setSelectedIngredients(prev =>
+      prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
+    );
+  };
+
+  const filtered = useMemo(() => {
+    let result = filter === "todos"
+      ? recipes
+      : recipes.filter(r => r.category === filter || r.category === "ambos");
+
+    if (selectedIngredients.length > 0) {
+      result = result.filter(r =>
+        selectedIngredients.every(ing =>
+          r.ingredients.some(i => i.name === ing)
+        )
+      );
+    }
+    return result;
+  }, [filter, selectedIngredients]);
 
   if (selectedRecipe) {
     return (
@@ -39,8 +71,8 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Filter */}
-        <div className="flex gap-2 justify-center mb-6">
+        {/* Category Filter */}
+        <div className="flex gap-2 justify-center mb-4">
           {([
             ["todos", "Todos"],
             ["almuerzo", "🍽 Almuerzo"],
@@ -60,16 +92,83 @@ const Index = () => {
           ))}
         </div>
 
+        {/* Ingredient Filter */}
+        <div className="mb-6">
+          <Popover>
+            <PopoverTrigger asChild>
+              <button className="w-full flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card text-sm font-body text-muted-foreground hover:border-primary/40 transition-colors">
+                <Filter className="w-4 h-4 text-primary" />
+                {selectedIngredients.length > 0
+                  ? `${selectedIngredients.length} ingrediente(s) seleccionado(s)`
+                  : "Filtrar por ingredientes…"}
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80 p-3" align="center">
+              <input
+                type="text"
+                placeholder="Buscar ingrediente…"
+                value={ingredientSearch}
+                onChange={e => setIngredientSearch(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm font-body text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring mb-2"
+              />
+              <div className="max-h-48 overflow-y-auto space-y-0.5">
+                {filteredIngredients.map(name => (
+                  <button
+                    key={name}
+                    onClick={() => toggleIngredient(name)}
+                    className={`w-full text-left px-3 py-1.5 rounded-lg text-sm font-body transition-colors ${
+                      selectedIngredients.includes(name)
+                        ? "bg-primary/10 text-primary font-medium"
+                        : "text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {selectedIngredients.includes(name) ? "✓ " : ""}{name}
+                  </button>
+                ))}
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          {/* Selected badges */}
+          {selectedIngredients.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {selectedIngredients.map(name => (
+                <Badge
+                  key={name}
+                  variant="secondary"
+                  className="cursor-pointer gap-1 font-body text-xs"
+                  onClick={() => toggleIngredient(name)}
+                >
+                  {name}
+                  <X className="w-3 h-3" />
+                </Badge>
+              ))}
+              <button
+                onClick={() => setSelectedIngredients([])}
+                className="text-xs text-muted-foreground hover:text-foreground font-body underline ml-1"
+              >
+                Limpiar
+              </button>
+            </div>
+          )}
+        </div>
+
         {/* Recipe list */}
         <div className="space-y-3">
-          {filtered.map((recipe, i) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              onClick={setSelectedRecipe}
-              index={i}
-            />
-          ))}
+          {filtered.length === 0 ? (
+            <p className="text-center text-muted-foreground font-body text-sm py-8">
+              No se encontraron recetas con esos ingredientes.
+            </p>
+          ) : (
+            filtered.map((recipe, i) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                onClick={setSelectedRecipe}
+                index={i}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>
