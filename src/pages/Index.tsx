@@ -10,7 +10,7 @@ type CategoryFilter = "todos" | "almuerzo" | "cena";
 
 const Index = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-  const [filter, setFilter] = useState<Filter>("todos");
+  const [filter, setFilter] = useState<CategoryFilter>("todos");
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [ingredientSearch, setIngredientSearch] = useState("");
 
@@ -77,7 +77,7 @@ const Index = () => {
             ["todos", "Todos"],
             ["almuerzo", "🍽 Almuerzo"],
             ["cena", "🌙 Cena"],
-          ] as [Filter, string][]).map(([key, label]) => (
+          ] as [CategoryFilter, string][]).map(([key, label]) => (
             <button
               key={key}
               onClick={() => setFilter(key)}
@@ -97,7 +97,7 @@ const Index = () => {
           <Popover>
             <PopoverTrigger asChild>
               <button className="w-full flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card text-sm font-body text-muted-foreground hover:border-primary/40 transition-colors">
-                <Filter className="w-4 h-4 text-primary" />
+                <FilterIcon className="w-4 h-4 text-primary" />
                 {selectedIngredients.length > 0
                   ? `${selectedIngredients.length} ingrediente(s) seleccionado(s)`
                   : "Filtrar por ingredientes…"}
