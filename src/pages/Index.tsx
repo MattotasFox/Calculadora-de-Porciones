@@ -64,7 +64,7 @@ const Index = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
             <ChefHat className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="font-display text-3xl text-foreground">Porciones Justas</h1>
+          <h1 className="font-display text-3xl text-foreground">Calculadora de Porciones</h1>
           <p className="text-muted-foreground font-body mt-2 text-sm">
             Calcula los ingredientes exactos para cada receta.<br />
             Sin desperdicios, sin que falte nada.
