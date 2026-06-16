@@ -362,7 +362,7 @@ export const recipes: Recipe[] = [
   {
     id: "chili-con-carne",
     name: "Porotos con Carne",
-    emoji: "🌶️",
+    emoji: "🫘",
     category: "cena",
     baseServings: 6,
     prepTime: "45 min",
