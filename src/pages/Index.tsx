@@ -1,18 +1,24 @@
 import { useState, useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { recipes, Recipe } from "@/data/recipes";
 import RecipeCard from "@/components/RecipeCard";
 import RecipeDetail from "@/components/RecipeDetail";
-import { ChefHat, Filter as FilterIcon, X } from "lucide-react";
+import { ChefHat, Filter as FilterIcon, X, ArrowLeft } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 
 type CategoryFilter = "todos" | "almuerzo" | "cena";
 
 const Index = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const preselected = (location.state as { preselectedIngredients?: string[] } | null)?.preselectedIngredients ?? [];
+
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [filter, setFilter] = useState<CategoryFilter>("todos");
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>(preselected);
   const [ingredientSearch, setIngredientSearch] = useState("");
+
 
   // Extract all unique ingredient names
   const allIngredients = useMemo(() => {
@@ -60,16 +66,22 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="max-w-lg mx-auto px-4 py-8">
         {/* Header */}
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-4">
-            <ChefHat className="w-8 h-8 text-primary" />
+        <div className="flex items-center gap-3 mb-6 animate-fade-in">
+          <button
+            onClick={() => navigate("/")}
+            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-colors shrink-0"
+            aria-label="Volver al inicio"
+          >
+            <ArrowLeft className="w-5 h-5 text-foreground" />
+          </button>
+          <div className="flex items-center gap-3">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10">
+              <ChefHat className="w-6 h-6 text-primary" />
+            </div>
+            <h1 className="font-display text-2xl text-foreground leading-tight">Calculadora de Porciones</h1>
           </div>
-          <h1 className="font-display text-3xl text-foreground">Calculadora de Porciones</h1>
-          <p className="text-muted-foreground font-body mt-2 text-sm">
-            Calcula los ingredientes exactos para cada receta.<br />
-            Sin desperdicios, sin que falte nada.
-          </p>
         </div>
+
 
         {/* Category Filter */}
         <div className="flex gap-2 justify-center mb-4">
