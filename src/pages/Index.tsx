@@ -20,12 +20,19 @@ const Index = () => {
   const [ingredientSearch, setIngredientSearch] = useState("");
 
 
-  // Extract all unique ingredient names
+  // Recipes scoped by current category (used for ingredient list)
+  const categoryRecipes = useMemo(() => {
+    return filter === "todos"
+      ? recipes
+      : recipes.filter(r => r.category === filter || r.category === "ambos");
+  }, [filter]);
+
+  // Extract ingredient names only from recipes in the current category
   const allIngredients = useMemo(() => {
     const set = new Set<string>();
-    recipes.forEach(r => r.ingredients.forEach(i => set.add(i.name)));
+    categoryRecipes.forEach(r => r.ingredients.forEach(i => set.add(i.name)));
     return Array.from(set).sort();
-  }, []);
+  }, [categoryRecipes]);
 
   const filteredIngredients = allIngredients.filter(name =>
     name.toLowerCase().includes(ingredientSearch.toLowerCase())
@@ -38,10 +45,7 @@ const Index = () => {
   };
 
   const filtered = useMemo(() => {
-    let result = filter === "todos"
-      ? recipes
-      : recipes.filter(r => r.category === filter || r.category === "ambos");
-
+    let result = categoryRecipes;
     if (selectedIngredients.length > 0) {
       result = result.filter(r =>
         selectedIngredients.every(ing =>
@@ -50,7 +54,20 @@ const Index = () => {
       );
     }
     return result;
-  }, [filter, selectedIngredients]);
+  }, [categoryRecipes, selectedIngredients]);
+
+  // When changing category, drop selected ingredients that don't apply anymore
+  const handleCategoryChange = (key: CategoryFilter) => {
+    setFilter(key);
+    setSelectedIngredients(prev => {
+      const available = new Set<string>();
+      const scoped = key === "todos"
+        ? recipes
+        : recipes.filter(r => r.category === key || r.category === "ambos");
+      scoped.forEach(r => r.ingredients.forEach(i => available.add(i.name)));
+      return prev.filter(n => available.has(n));
+    });
+  };
 
   if (selectedRecipe) {
     return (
@@ -92,7 +109,7 @@ const Index = () => {
           ] as [CategoryFilter, string][]).map(([key, label]) => (
             <button
               key={key}
-              onClick={() => setFilter(key)}
+              onClick={() => handleCategoryChange(key)}
               className={`px-4 py-1.5 rounded-full text-sm font-body transition-colors ${
                 filter === key
                   ? "bg-primary text-primary-foreground"
