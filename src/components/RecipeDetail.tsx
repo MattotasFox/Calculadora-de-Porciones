@@ -84,21 +84,46 @@ const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
           >
             <Minus className="w-4 h-4" />
           </Button>
-          <span className="text-4xl font-display text-primary w-16 text-center">{servings}</span>
+          {editingServings ? (
+            <input
+              type="number"
+              min={1}
+              max={500}
+              autoFocus
+              value={servingsInput}
+              onChange={(e) => setServingsInput(e.target.value)}
+              onBlur={() => {
+                const n = parseInt(servingsInput, 10);
+                if (!isNaN(n) && n >= 1) setServings(Math.min(500, n));
+                setEditingServings(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+                if (e.key === "Escape") setEditingServings(false);
+              }}
+              className="text-4xl font-display text-primary w-24 text-center bg-transparent border-b-2 border-primary focus:outline-none tabular-nums"
+            />
+          ) : (
+            <button
+              onClick={() => {
+                setServingsInput(String(servings));
+                setEditingServings(true);
+              }}
+              className="text-4xl font-display text-primary w-16 text-center hover:opacity-80 transition-opacity"
+              aria-label="Editar número de personas"
+            >
+              {servings}
+            </button>
+          )}
           <Button
             variant="outline"
             size="icon"
             onClick={() => setServings(servings + 1)}
-            disabled={servings >= 50}
+            disabled={servings >= 500}
           >
             <Plus className="w-4 h-4" />
           </Button>
         </div>
-        {servings !== recipe.baseServings && (
-          <p className="text-center text-xs text-muted-foreground mt-3 font-body">
-            Receta original para {recipe.baseServings} personas — ajustada ×{ratio.toFixed(2)}
-          </p>
-        )}
       </div>
 
       {/* Ingredients List */}
