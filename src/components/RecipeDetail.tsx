@@ -51,6 +51,8 @@ const toGrams = (qty: number, unit: string): { quantity: number; unit: string } 
 const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
   const [servings, setServings] = useState(recipe.baseServings);
   const [showGrams, setShowGrams] = useState(false);
+  const [editingServings, setEditingServings] = useState(false);
+  const [servingsInput, setServingsInput] = useState(String(recipe.baseServings));
   const ratio = servings / recipe.baseServings;
 
   return (
