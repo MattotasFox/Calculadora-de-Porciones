@@ -67,7 +67,6 @@ const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
       <div className="text-center mb-8">
         <span className="text-6xl block mb-3">{recipe.emoji}</span>
         <h2 className="font-display text-3xl text-foreground">{recipe.name}</h2>
-        <p className="text-muted-foreground font-body mt-1">⏱ {recipe.prepTime}</p>
       </div>
 
       {/* Servings Selector */}
