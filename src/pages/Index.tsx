@@ -109,7 +109,7 @@ const Index = () => {
           ] as [CategoryFilter, string][]).map(([key, label]) => (
             <button
               key={key}
-              onClick={() => setFilter(key)}
+              onClick={() => handleCategoryChange(key)}
               className={`px-4 py-1.5 rounded-full text-sm font-body transition-colors ${
                 filter === key
                   ? "bg-primary text-primary-foreground"
