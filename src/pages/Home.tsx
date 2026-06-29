@@ -109,13 +109,12 @@ const Home = () => {
 
         {/* Options */}
         <div className="flex flex-col gap-4 mt-4">
-          {options.map(({ icon: Icon, title, desc, onClick, disabled }, i) => (
+          {options.map(({ icon: Icon, title, desc, onClick }, i) => (
             <button
               key={title}
               onClick={onClick}
-              disabled={disabled}
               style={{ animationDelay: `${i * 80}ms` }}
-              className="group w-full bg-card border border-border rounded-2xl p-5 flex items-center gap-4 text-left transition-all hover:border-primary/40 hover:shadow-md active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 animate-fade-in"
+              className="group w-full bg-card border border-border rounded-2xl p-5 flex items-center gap-4 text-left transition-all hover:border-primary/40 hover:shadow-md active:scale-[0.98] animate-fade-in"
             >
               <div className="shrink-0 w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors">
                 <Icon className="w-7 h-7 text-primary" />
