@@ -7,9 +7,9 @@ interface RecipeCardProps {
 }
 
 const categoryLabel = {
-  almuerzo: "Almuerzo",
-  cena: "Cena",
-  ambos: "Almuerzo / Cena",
+  omnivoro: "Omnívoro",
+  vegetariano: "Vegetariano",
+  vegano: "Vegano",
 };
 
 const RecipeCard = ({ recipe, onClick, index }: RecipeCardProps) => {
@@ -28,9 +28,6 @@ const RecipeCard = ({ recipe, onClick, index }: RecipeCardProps) => {
           <div className="flex items-center gap-3 mt-1.5">
             <span className="text-xs font-body text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
               {categoryLabel[recipe.category]}
-            </span>
-            <span className="text-xs text-muted-foreground font-body">
-              ⏱ {recipe.prepTime}
             </span>
           </div>
           <p className="text-xs text-muted-foreground mt-2 font-body">
