@@ -61,10 +61,9 @@ const Home = () => {
     },
     {
       icon: PlusCircle,
-      title: "Agregar receta",
-      desc: "Próximamente",
-      onClick: () => {},
-      disabled: true,
+      title: "Mis Recetas",
+      desc: "Crea y guarda tus propias versiones",
+      onClick: () => navigate("/mis-recetas"),
     },
   ];
 

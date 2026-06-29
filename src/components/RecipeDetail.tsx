@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Recipe } from "@/data/recipes";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, ArrowLeft, Users, ShoppingCart, Scale } from "lucide-react";
+import { Minus, Plus, ArrowLeft, Users, ShoppingCart, Scale, Pencil } from "lucide-react";
+import EditIngredientsDialog from "./EditIngredientsDialog";
 
 interface RecipeDetailProps {
   recipe: Recipe;
