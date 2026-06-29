@@ -8,9 +8,8 @@ export interface Recipe {
   id: string;
   name: string;
   emoji: string;
-  category: "almuerzo" | "cena" | "ambos";
+  category: "omnivoro" | "vegetariano" | "vegano";
   baseServings: number;
-  prepTime: string;
   ingredients: Ingredient[];
 }
 
@@ -19,9 +18,8 @@ export const recipes: Recipe[] = [
     id: "arroz-con-pollo",
     name: "Arroz con Pollo",
     emoji: "🍗",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "45 min",
     ingredients: [
       { name: "Arroz", quantity: 2, unit: "tazas" },
       { name: "Presas de pollo", quantity: 8, unit: "piezas" },
@@ -38,9 +36,8 @@ export const recipes: Recipe[] = [
     id: "pasta-bolognesa",
     name: "Pasta Boloñesa",
     emoji: "🍝",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "35 min",
     ingredients: [
       { name: "Pasta", quantity: 400, unit: "g" },
       { name: "Carne molida", quantity: 500, unit: "g" },
@@ -57,9 +54,8 @@ export const recipes: Recipe[] = [
     id: "tacos",
     name: "Tacos de Carne",
     emoji: "🌮",
-    category: "cena",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "30 min",
     ingredients: [
       { name: "Tortillas de maíz", quantity: 12, unit: "unidades" },
       { name: "Carne de vacuno", quantity: 500, unit: "g" },
@@ -75,9 +71,8 @@ export const recipes: Recipe[] = [
     id: "ensalada-cesar",
     name: "Ensalada César",
     emoji: "🥗",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "15 min",
     ingredients: [
       { name: "Lechuga romana", quantity: 2, unit: "unidades" },
       { name: "Pechuga de pollo", quantity: 2, unit: "unidades" },
@@ -92,9 +87,8 @@ export const recipes: Recipe[] = [
     id: "sopa-de-lentejas",
     name: "Sopa de Lentejas",
     emoji: "🥣",
-    category: "almuerzo",
+    category: "vegano",
     baseServings: 6,
-    prepTime: "50 min",
     ingredients: [
       { name: "Lentejas", quantity: 500, unit: "g" },
       { name: "Papa", quantity: 2, unit: "unidades" },
@@ -111,9 +105,8 @@ export const recipes: Recipe[] = [
     id: "hamburguesas",
     name: "Hamburguesas Caseras",
     emoji: "🍔",
-    category: "cena",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "25 min",
     ingredients: [
       { name: "Carne molida", quantity: 600, unit: "g" },
       { name: "Pan de hamburguesa", quantity: 4, unit: "unidades" },
@@ -129,9 +122,8 @@ export const recipes: Recipe[] = [
     id: "pollo-al-horno",
     name: "Pollo al Horno",
     emoji: "🍗",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "1h 30min",
     ingredients: [
       { name: "Pollo entero", quantity: 1, unit: "unidad" },
       { name: "Papa", quantity: 6, unit: "unidades" },
@@ -148,9 +140,8 @@ export const recipes: Recipe[] = [
     id: "quesadillas",
     name: "Quesadillas",
     emoji: "🧀",
-    category: "cena",
+    category: "vegetariano",
     baseServings: 4,
-    prepTime: "20 min",
     ingredients: [
       { name: "Tortillas de harina", quantity: 8, unit: "unidades" },
       { name: "Queso Oaxaca", quantity: 400, unit: "g" },
@@ -164,9 +155,8 @@ export const recipes: Recipe[] = [
     id: "pescado-a-la-plancha",
     name: "Pescado a la Plancha",
     emoji: "🐟",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "20 min",
     ingredients: [
       { name: "Filete de pescado", quantity: 4, unit: "unidades" },
       { name: "Limón", quantity: 3, unit: "unidades" },
@@ -181,9 +171,8 @@ export const recipes: Recipe[] = [
     id: "arroz-frito",
     name: "Arroz Frito",
     emoji: "🍚",
-    category: "ambos",
+    category: "vegetariano",
     baseServings: 4,
-    prepTime: "25 min",
     ingredients: [
       { name: "Arroz cocido", quantity: 4, unit: "tazas" },
       { name: "Huevos", quantity: 3, unit: "unidades" },
@@ -199,9 +188,8 @@ export const recipes: Recipe[] = [
     id: "pastel-de-choclo",
     name: "Pastel de Choclo",
     emoji: "🌽",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "1h 30min",
     ingredients: [
       { name: "Choclo (maíz tierno)", quantity: 12, unit: "unidades" },
       { name: "Albahaca", quantity: 6, unit: "hojas" },
@@ -221,9 +209,8 @@ export const recipes: Recipe[] = [
     id: "humitas",
     name: "Humitas Chilenas",
     emoji: "🌽",
-    category: "almuerzo",
+    category: "vegetariano",
     baseServings: 6,
-    prepTime: "1h 15min",
     ingredients: [
       { name: "Choclo (maíz tierno)", quantity: 10, unit: "unidades" },
       { name: "Cebolla", quantity: 2, unit: "unidades" },
@@ -238,9 +225,8 @@ export const recipes: Recipe[] = [
     id: "empanadas-de-pino",
     name: "Empanadas de Pino",
     emoji: "🥟",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 8,
-    prepTime: "1h 30min",
     ingredients: [
       { name: "Harina", quantity: 500, unit: "g" },
       { name: "Manteca", quantity: 100, unit: "g" },
@@ -257,9 +243,8 @@ export const recipes: Recipe[] = [
     id: "cazuela",
     name: "Cazuela de Vacuno",
     emoji: "🍲",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "1h 20min",
     ingredients: [
       { name: "Carne de vacuno", quantity: 600, unit: "g" },
       { name: "Papa", quantity: 6, unit: "unidades" },
@@ -275,9 +260,8 @@ export const recipes: Recipe[] = [
     id: "sancocho",
     name: "Sancocho",
     emoji: "🍲",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 8,
-    prepTime: "1h 30min",
     ingredients: [
       { name: "Presas de pollo", quantity: 8, unit: "piezas" },
       { name: "Yuca", quantity: 400, unit: "g" },
@@ -294,9 +278,8 @@ export const recipes: Recipe[] = [
     id: "arepas",
     name: "Arepas Rellenas",
     emoji: "🫓",
-    category: "ambos",
+    category: "vegetariano",
     baseServings: 6,
-    prepTime: "30 min",
     ingredients: [
       { name: "Harina de maíz precocida", quantity: 2, unit: "tazas" },
       { name: "Queso rallado", quantity: 150, unit: "g" },
@@ -309,9 +292,8 @@ export const recipes: Recipe[] = [
     id: "ceviche",
     name: "Ceviche de Pescado",
     emoji: "🐟",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "30 min",
     ingredients: [
       { name: "Filete de pescado", quantity: 500, unit: "g" },
       { name: "Limón", quantity: 10, unit: "unidades" },
@@ -326,9 +308,8 @@ export const recipes: Recipe[] = [
     id: "lasagna",
     name: "Lasaña",
     emoji: "🧀",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "1h 15min",
     ingredients: [
       { name: "Láminas de lasaña", quantity: 12, unit: "unidades" },
       { name: "Carne molida", quantity: 500, unit: "g" },
@@ -345,9 +326,8 @@ export const recipes: Recipe[] = [
     id: "pollo-a-la-crema",
     name: "Pollo a la Crema",
     emoji: "🍗",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "35 min",
     ingredients: [
       { name: "Pechuga de pollo", quantity: 4, unit: "unidades" },
       { name: "Crema", quantity: 250, unit: "ml" },
@@ -363,9 +343,8 @@ export const recipes: Recipe[] = [
     id: "chili-con-carne",
     name: "Porotos con Carne",
     emoji: "🫘",
-    category: "cena",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "45 min",
     ingredients: [
       { name: "Carne molida", quantity: 600, unit: "g" },
       { name: "Porotos rojos", quantity: 400, unit: "g" },
@@ -382,9 +361,8 @@ export const recipes: Recipe[] = [
     id: "tortilla-espanola",
     name: "Tortilla Española",
     emoji: "🥚",
-    category: "ambos",
+    category: "vegetariano",
     baseServings: 4,
-    prepTime: "30 min",
     ingredients: [
       { name: "Huevos", quantity: 6, unit: "unidades" },
       { name: "Papa", quantity: 4, unit: "unidades" },
@@ -397,9 +375,8 @@ export const recipes: Recipe[] = [
     id: "curry-de-pollo",
     name: "Curry de Pollo",
     emoji: "🍛",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "40 min",
     ingredients: [
       { name: "Pechuga de pollo", quantity: 500, unit: "g" },
       { name: "Leche de coco", quantity: 400, unit: "ml" },
@@ -416,9 +393,8 @@ export const recipes: Recipe[] = [
     id: "wrap-de-pollo",
     name: "Wraps de Pollo",
     emoji: "🌯",
-    category: "cena",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "20 min",
     ingredients: [
       { name: "Tortillas de harina", quantity: 4, unit: "unidades" },
       { name: "Pechuga de pollo", quantity: 2, unit: "unidades" },
@@ -433,9 +409,8 @@ export const recipes: Recipe[] = [
     id: "estofado-de-carne",
     name: "Estofado de Carne",
     emoji: "🥩",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "1h 30min",
     ingredients: [
       { name: "Carne de vacuno", quantity: 700, unit: "g" },
       { name: "Papa", quantity: 4, unit: "unidades" },
@@ -451,9 +426,8 @@ export const recipes: Recipe[] = [
     id: "papas-rellenas",
     name: "Papas Rellenas",
     emoji: "🥔",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "50 min",
     ingredients: [
       { name: "Papa", quantity: 8, unit: "unidades" },
       { name: "Carne molida", quantity: 300, unit: "g" },
@@ -469,9 +443,8 @@ export const recipes: Recipe[] = [
     id: "sopa-de-pollo",
     name: "Sopa de Pollo",
     emoji: "🍜",
-    category: "cena",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "45 min",
     ingredients: [
       { name: "Presas de pollo", quantity: 6, unit: "piezas" },
       { name: "Fideos", quantity: 200, unit: "g" },
@@ -487,9 +460,8 @@ export const recipes: Recipe[] = [
     id: "milanesas",
     name: "Milanesas",
     emoji: "🥩",
-    category: "ambos",
+    category: "omnivoro",
     baseServings: 4,
-    prepTime: "30 min",
     ingredients: [
       { name: "Pechuga de pollo", quantity: 4, unit: "unidades" },
       { name: "Pan rallado", quantity: 200, unit: "g" },
@@ -505,9 +477,8 @@ export const recipes: Recipe[] = [
     id: "guiso-de-arroz",
     name: "Guiso de Arroz",
     emoji: "🍚",
-    category: "almuerzo",
+    category: "omnivoro",
     baseServings: 6,
-    prepTime: "40 min",
     ingredients: [
       { name: "Arroz", quantity: 2, unit: "tazas" },
       { name: "Carne molida", quantity: 400, unit: "g" },
