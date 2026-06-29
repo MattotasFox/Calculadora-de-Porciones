@@ -54,6 +54,7 @@ const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
   const [showGrams, setShowGrams] = useState(false);
   const [editingServings, setEditingServings] = useState(false);
   const [servingsInput, setServingsInput] = useState(String(recipe.baseServings));
+  const [editOpen, setEditOpen] = useState(false);
   const ratio = servings / recipe.baseServings;
 
   return (
@@ -169,6 +170,17 @@ const RecipeDetail = ({ recipe, onBack }: RecipeDetailProps) => {
           })}
         </ul>
       </div>
+
+      {/* Edit Ingredients */}
+      <button
+        onClick={() => setEditOpen(true)}
+        className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-dashed border-primary/40 text-primary font-body text-sm hover:bg-primary/5 transition-colors"
+      >
+        <Pencil className="w-4 h-4" />
+        Editar ingredientes
+      </button>
+
+      <EditIngredientsDialog open={editOpen} onOpenChange={setEditOpen} recipe={recipe} />
     </div>
   );
 };
