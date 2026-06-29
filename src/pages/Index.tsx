@@ -7,7 +7,7 @@ import { ChefHat, Filter as FilterIcon, X, ArrowLeft } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 
-type CategoryFilter = "todos" | "almuerzo" | "cena";
+type CategoryFilter = "todos" | "omnivoro" | "vegetariano" | "vegano";
 
 const Index = () => {
   const location = useLocation();
@@ -24,7 +24,7 @@ const Index = () => {
   const categoryRecipes = useMemo(() => {
     return filter === "todos"
       ? recipes
-      : recipes.filter(r => r.category === filter || r.category === "ambos");
+      : recipes.filter(r => r.category === filter);
   }, [filter]);
 
   // Extract ingredient names only from recipes in the current category
@@ -63,7 +63,7 @@ const Index = () => {
       const available = new Set<string>();
       const scoped = key === "todos"
         ? recipes
-        : recipes.filter(r => r.category === key || r.category === "ambos");
+        : recipes.filter(r => r.category === key);
       scoped.forEach(r => r.ingredients.forEach(i => available.add(i.name)));
       return prev.filter(n => available.has(n));
     });
@@ -104,8 +104,9 @@ const Index = () => {
         <div className="flex gap-2 justify-center mb-4">
           {([
             ["todos", "Todos"],
-            ["almuerzo", "🍽 Almuerzo"],
-            ["cena", "🌙 Cena"],
+            ["omnivoro", "🍖 Omnívoros"],
+            ["vegetariano", "🧀 Vegetarianos"],
+            ["vegano", "🌱 Veganos"],
           ] as [CategoryFilter, string][]).map(([key, label]) => (
             <button
               key={key}
